@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {IUser} from "../models/IUser.ts";
+import {IUser} from "../../models/IUser.ts";
 
 type UserPropType = {
     item: IUser;
