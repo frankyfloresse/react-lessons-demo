@@ -41,7 +41,7 @@ const UsersComponent = () => {
     }, []);
 
     const [item, setItem] = useState<IUser | null>(null)
-    const onUserPrint = (user: IUser) => {
+    const onUserClick = (user: IUser) => {
         setItem(user);
     }
 
@@ -51,7 +51,7 @@ const UsersComponent = () => {
                 item && <div>{JSON.stringify(item)}</div>
             }
             {
-                users.map(user => <UserComponent onUserSelect={onUserPrint} key={user.id} item={user} />)
+                users.map(user => <UserComponent onClickFake={onUserClick} key={user.id} item={user} />)
             }
         </div>
     );

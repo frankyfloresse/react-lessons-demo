@@ -3,15 +3,15 @@ import {IUser} from "../../models/IUser.ts";
 
 type UserPropType = {
     item: IUser;
-    onUserSelect: (item: IUser) => void;
+    onClickFake: (item: IUser) => void;
 }
 
-const UserComponent: FC<UserPropType> = ({item, onUserSelect}) => {
+const UserComponent: FC<UserPropType> = ({item, onClickFake}) => {
     return (
         <>
             <div>{item.name}</div>
             <button onClick={() => {
-                onUserSelect(item);
+                onClickFake(item);
             }}>details</button>
         </>
     );
