@@ -7,9 +7,6 @@ const SingleUserDetailsPage = () => {
 
     return (
         <div>
-            {/*{JSON.stringify(state)}*/}
-            {/*{state.email}*/}
-
             {user.email}
         </div>
     );
