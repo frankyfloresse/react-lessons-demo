@@ -7,7 +7,6 @@ type PostsTypeProps = {
 }
 
 const PostsComponent: FC<PostsTypeProps> = ({userId}) => {
-
     const [posts, setPosts] = useState<IPost[]>([]);
 
     useEffect(() => {
