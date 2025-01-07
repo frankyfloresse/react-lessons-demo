@@ -10,7 +10,7 @@ const UserComponent: FC<IProps> = ({item}) => {
     const navigate = useNavigate();
 
     const handleOnClick = () => {
-        navigate('/users/details', {state: item});
+        navigate('/users/posts/' + item.id, {state: item});
     }
 
     return (
