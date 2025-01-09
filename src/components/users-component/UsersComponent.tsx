@@ -40,18 +40,17 @@ const UsersComponent = () => {
         }
     }, []);
 
-    const [item, setItem] = useState<IUser | null>(null)
-    const onUserClick = (user: IUser) => {
-        setItem(user);
+    const deleteUser = (id: number) => {
+        // let result = users.filter(user => user.id !== id);
+        // setUsers(result);
+
+        setUsers((users) => users.filter(user => user.id !== id))
     }
 
     return (
         <div>
             {
-                item && <div>{JSON.stringify(item)}</div>
-            }
-            {
-                users.map(user => <UserComponent onClickFake={onUserClick} key={user.id} item={user} />)
+                users.map(user => <UserComponent  onUserDelete={deleteUser} key={user.id} item={user} />)
             }
         </div>
     );

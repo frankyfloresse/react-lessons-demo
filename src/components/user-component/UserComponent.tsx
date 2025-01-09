@@ -3,16 +3,17 @@ import {IUser} from "../../models/IUser.ts";
 
 type UserPropType = {
     item: IUser;
-    onClickFake: (item: IUser) => void;
+    onUserDelete: (id: number) => void;
 }
 
-const UserComponent: FC<UserPropType> = ({item, onClickFake}) => {
+const UserComponent: FC<UserPropType> = ({item, onUserDelete}) => {
     return (
         <>
             <div>{item.name}</div>
+
             <button onClick={() => {
-                onClickFake(item);
-            }}>details</button>
+                onUserDelete(item.id);
+            }}>delete</button>
         </>
     );
 };
