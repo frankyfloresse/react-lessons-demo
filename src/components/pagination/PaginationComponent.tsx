@@ -1,7 +1,13 @@
 import {useSearchParams} from "react-router-dom";
+import {FC} from "react";
 
-const PaginationComponent = () => {
-    const [query, setQuery] = useSearchParams({pg: '1'});
+interface IProps {
+    maxPage: number;
+}
+
+const PaginationComponent: FC<IProps> = ({ maxPage }) => {
+    const [query, setQuery] = useSearchParams({ pg: '1' });
+
     return (
         <div>
             <button onClick={() => {
@@ -9,7 +15,10 @@ const PaginationComponent = () => {
                 if (pg) {
                     let currentPage = +pg;
                     currentPage--;
-                    setQuery({pg: currentPage.toString()})
+
+                    if (currentPage > 0) {
+                        setQuery({pg: currentPage.toString()})
+                    }
                 }
             }}>previous
             </button>
@@ -19,7 +28,10 @@ const PaginationComponent = () => {
                 if (pg) {
                     let currentPage = +pg;
                     currentPage++;
-                    setQuery({pg: currentPage.toString()})
+
+                    if (currentPage <= maxPage) {
+                        setQuery({pg: currentPage.toString()})
+                    }
                 }
             }}>next
             </button>
