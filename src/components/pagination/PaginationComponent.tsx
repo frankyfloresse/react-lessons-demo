@@ -8,32 +8,25 @@ interface IProps {
 const PaginationComponent: FC<IProps> = ({ maxPage }) => {
     const [query, setQuery] = useSearchParams({ pg: '1' });
 
+    const updatePage = (offset: number) => {
+        const pg = query.get('pg');
+
+        if (pg) {
+            let currentPage = +pg;
+            currentPage += offset;
+
+            if (currentPage > 0 && currentPage <= maxPage) {
+                setQuery({pg: currentPage.toString()})
+            }
+        }
+    }
+
     return (
         <div>
-            <button onClick={() => {
-                const pg = query.get('pg');
-                if (pg) {
-                    let currentPage = +pg;
-                    currentPage--;
-
-                    if (currentPage > 0) {
-                        setQuery({pg: currentPage.toString()})
-                    }
-                }
-            }}>previous
+            <button onClick={() => updatePage(-1)}>previous
             </button>
 
-            <button onClick={() => {
-                const pg = query.get('pg');
-                if (pg) {
-                    let currentPage = +pg;
-                    currentPage++;
-
-                    if (currentPage <= maxPage) {
-                        setQuery({pg: currentPage.toString()})
-                    }
-                }
-            }}>next
+            <button onClick={() => updatePage(1)}>next
             </button>
         </div>
     );
