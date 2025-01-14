@@ -3,11 +3,11 @@ import {useForm} from "react-hook-form";
 interface IFormProps {
     username: string;
     password: string;
-    age: number;
+    age: number
 }
 
 const FormComponent = () => {
-    const { handleSubmit, register } = useForm<IFormProps>();
+    const {handleSubmit, register, formState: {errors, isValid}} = useForm<IFormProps>({mode: 'all'});
 
     const handleForms = (formDataProps: IFormProps) => {
         console.log(formDataProps);
@@ -17,15 +17,46 @@ const FormComponent = () => {
     return (
         <div>
             <form onSubmit={handleSubmit(handleForms)}>
-                {/*<input type="text" name={"username"}/>*/}
-                {/*<input type="text" name={"password"}/>*/}
-                {/*<input type="text" name={"age"}/>*/}
+                <div>
+                    <label>
+                        <input type="text" {...register('username',
+                        {
+                            required: {value: true, message: 'name is required'},
+                            minLength: {value: 4, message: 'name wrong'}
+                        })}/>
+                    </label>
 
-                <input type="text" {...register('username')}/>
-                <input type="text" {...register('password')}/>
-                <input type="text" {...register('age')}/>
+                    {errors.username && <div>{errors.username.message}</div>}
+                </div>
 
-                <button>send</button>
+                <div>
+                    <label>
+                        <input type="text" {...register('password',
+                        {
+                            required: true,
+                            minLength: {value: 3, message: 'pass too short'},
+                            maxLength: {value: 6, message: 'pass too long'}
+                        })}/>
+                    </label>
+
+                    {errors.password && <div>{errors.password.message}</div>}
+                </div>
+
+                <div>
+                    <label>
+                        <input type={'number'} {...register('age',
+                        {
+                            required: true,
+                            valueAsNumber: true,
+                            min: {value: 1, message: 'age too small'},
+                            max: {value: 117, message: 'age too big'},
+                        })}/>
+                    </label>
+
+                    {errors.age && <div>{errors.age.message}</div>}
+                </div>
+
+                <button disabled={!isValid}>send</button>
             </form>
         </div>
     );
