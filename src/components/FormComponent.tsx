@@ -14,7 +14,7 @@ const FormComponent = () => {
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        let user = {
+        const user = {
             username: formState.username,
             password: formState.password
         };
