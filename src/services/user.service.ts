@@ -15,7 +15,7 @@ axiosInstance.interceptors.request.use((request) => {
 })
 
 axiosInstance.interceptors.response.use(
-    r => r,
+    (response) => response,
     (error) => {
         if (error.message) {
             alert(error.message)
