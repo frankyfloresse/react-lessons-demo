@@ -50,7 +50,10 @@ export const loadAuthProducts = async (): Promise<IProduct[]> => {
 }
 
 export const refresh = async () => {
+    // Retrieves the current user token details from localStorage to get the refreshToken needed for the request
     const userWithTokens = retrieveLocalStorage<IUserWithTokens>('user');
+
+    //Sends POST request to '/refresh' endpoint with current refreshToken to obtain new tokens
     const { data: {accessToken, refreshToken}} = await axiosInstance.post<ITokenPair>('/refresh', {
         refreshToken: userWithTokens.refreshToken,
         expiresInMins: 1
@@ -58,5 +61,7 @@ export const refresh = async () => {
 
     userWithTokens.accessToken = accessToken;
     userWithTokens.refreshToken = refreshToken;
+
+    //Updates localStorage with the new token details
     localStorage.setItem('user', JSON.stringify(userWithTokens));
 }
