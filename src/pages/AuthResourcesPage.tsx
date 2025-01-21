@@ -1,7 +1,5 @@
 import {useEffect} from "react";
-import {authProducts} from "../services/api.service.ts";
-
-
+import {authProducts, refresh} from "../services/api.service.ts";
 
 const AuthResourcesPage = () => {
     useEffect(() => {
@@ -9,6 +7,10 @@ const AuthResourcesPage = () => {
             console.log(products);
         }).catch(error => {
             console.log(error);
+
+            refresh()
+                .then(() => authProducts())
+                .then(value => console.log(value));
         })
     }, []);
 
