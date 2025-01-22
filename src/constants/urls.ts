@@ -7,6 +7,8 @@ export const urls = {
             return baseUrl + '/' + id;
         }
     },
-    posts: {}
+    posts: {
+        userPostsById: (id: number) => baseUrl + '/posts?userId=' + id,
+    }
 }
 

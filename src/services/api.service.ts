@@ -9,5 +9,9 @@ export const userService = {
     getUser: async (id: number): Promise<IUser> => {
         return await fetch(urls.users.byId(id))
             .then((response) => response.json())
-    }
+    },
+    getUserPosts: async (id: number) => {
+        return await fetch(urls.posts.userPostsById(id))
+            .then((response) => response.json());
+}
 }
