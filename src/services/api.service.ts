@@ -1,8 +1,8 @@
 import axios from "axios";
 import {IUserWithTokens} from "../models/IUserWithTokens.ts";
-import {IProductsResponseModel} from "../models/IProductsResponseModel.ts";
+import {IProductsResponse} from "../models/IProductsResponse.ts";
 import {IProduct} from "../models/IProduct.ts";
-import {ITokenPair} from "../models/ITokenPair.ts";
+import {ITokens} from "../models/ITokens.ts";
 
 interface IPayload {
     username: string;
@@ -22,7 +22,7 @@ axiosInstance.interceptors.request.use(request => {
     return request;
 })
 
-const saveTokens = (tokens: ITokenPair) => {
+const saveTokens = (tokens: ITokens) => {
     localStorage.setItem('access_token', tokens.accessToken);
     localStorage.setItem('refresh_token', tokens.refreshToken);
 }
@@ -34,12 +34,12 @@ export const login = async (payload: IPayload): Promise<IUserWithTokens> => {
 }
 
 export const authProducts = async (): Promise<IProduct[]> => {
-    const { data } =  await axiosInstance.get<IProductsResponseModel>('/products');
+    const { data } =  await axiosInstance.get<IProductsResponse>('/products');
     return data.products;
 }
 
 export const refresh = async () => {
-    const { data } = await axiosInstance.post<ITokenPair>('/refresh', {
+    const { data } = await axiosInstance.post<ITokens>('/refresh', {
         refreshToken: localStorage.getItem('access_token'),
         expiresInMins: 1
     });

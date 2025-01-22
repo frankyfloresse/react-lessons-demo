@@ -1,4 +1,4 @@
-export interface ITokenPair  {
+export interface ITokens {
   accessToken: string;
   refreshToken: string;
 }
