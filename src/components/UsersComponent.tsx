@@ -1,5 +1,5 @@
 import UserComponent from "./UserComponent.tsx";
-import {useCallback, useEffect, useState} from "react";
+import {useCallback, useEffect, useMemo, useState} from "react";
 
 
 const UsersComponent = () => {
@@ -10,6 +10,11 @@ const UsersComponent = () => {
     }, [])
 
     const [users, setUsers] = useState([])
+
+    const arr: number[] = useMemo(() => {
+        return [11, 22, 33];
+    }, []);
+
     useEffect(() => {
         fetch('https://jsonplaceholder.typicode.com/users')
             .then(value => value.json())
@@ -23,7 +28,7 @@ const UsersComponent = () => {
     return (
         <div>
             users component
-            <UserComponent foo={foo} />
+            <UserComponent foo={foo} arrNums={arr} />
         </div>
     );
 };
