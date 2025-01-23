@@ -1,8 +1,8 @@
-import {memo} from "react";
+import {FC, memo} from "react";
 
 
-const UserComponent = memo(() => { //не буде рендиритися, якщо не буде змінюватися
-    console.log('test user');
+const UserComponent: FC<{foo: () => void}> = memo(() => { //не буде рендиритися, якщо не буде змінюватися
+    console.log('user');
 
     return (
         <div>user component</div>
