@@ -38,7 +38,6 @@ export const userSlice = createSlice({
                 console.log(action);
             })
 });
-
 export const userSliceActions = {
     ...userSlice.actions,
     loadUsers
